@@ -9,7 +9,7 @@ CONFIG_PATH = os.path.join('config', 'config.yaml')
 with open(CONFIG_PATH, 'r') as f:
     config = yaml.safe_load()
 
-openai.api_key = config['OPEN_API_KEY']
+openai.api_key = os.getenv('OPEN_API_KEY')
 
 # Function to get all nodes
 def fetch_nodes(tx):
