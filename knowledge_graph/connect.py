@@ -2,7 +2,7 @@ from neo4j import GraphDatabase
 import yaml
 import os
 
-def connect_to_db():
+def connect_to_neo4j():
     CONFIG_PATH = os.path.join('config', 'config.yaml')
 
     with open(CONFIG_PATH, 'r') as f:

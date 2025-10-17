@@ -1,15 +1,9 @@
 import time
 import openai
-import yaml
 import os 
-from connect import connect_to_db
+from connect import connect_to_neo4j
 
-CONFIG_PATH = os.path.join('config', 'config.yaml')
-
-with open(CONFIG_PATH, 'r') as f:
-    config = yaml.safe_load()
-
-openai.api_key = os.getenv('OPEN_API_KEY')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # Function to get all nodes
 def fetch_nodes(tx):
@@ -36,7 +30,7 @@ def update_embedding(tx, node_name, labels, embedding):
     """, node_name=node_name, label=labels[0], embedding=embedding)
 
 def main():
-    driver = connect_to_db()
+    driver = connect_to_neo4j()
     with driver.session(database="neo4j") as session:
         nodes = session.execute_read(fetch_nodes)
         

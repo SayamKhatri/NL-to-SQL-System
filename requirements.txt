@@ -3,3 +3,4 @@ pyyaml
 openai
 langchain
 langchain_google_genai
+pandas 

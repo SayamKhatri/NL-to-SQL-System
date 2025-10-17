@@ -1,8 +1,8 @@
-from connect import connect_to_db
+from connect import connect_to_neo4j
 
 def create_hospital_kg(tx, database_name, tables, columns, primary_keys, foreign_keys):
 
-    driver = connect_to_db()
+    driver = connect_to_neo4j()
     
     # Database node
     tx.run("MERGE (d:Database {name: $db_name})", db_name=database_name)
