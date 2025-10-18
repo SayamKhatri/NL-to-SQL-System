@@ -2,18 +2,18 @@ import numpy as np
 import openai
 import os
 from knowledge_graph.connect import connect_to_neo4j
-from context_graph import get_context_subgraph, search_similar_nodes
-from agents import pruning_agent, generation_agent
-from utilities import gen_query_result
-
-
-openai.api_key = os.getenv('OPENAI_API_KEY')
-
+from text_to_SQL.context_graph import get_context_subgraph, search_similar_nodes
+from agents.pruning_agent import pruning_agent
+from agents.generation_agent import generation_agent
+from text_to_SQL.utilities import gen_query_result
+import warnings
+warnings.filterwarnings('ignore')
 
 def generate_chatdb(question):
     driver = connect_to_neo4j()
-    results = search_similar_nodes(question)
+    results = search_similar_nodes(driver=driver, query=question)
     top_nodes = set()
+
     for score, labels, name in results:
         top_nodes.add(name)
     top_nodes = list(top_nodes)
@@ -32,3 +32,6 @@ def generate_chatdb(question):
     gen_query = generation_agent(question, standardized_context)
 
     print(gen_query_result(gen_query))
+
+if __name__ == '__main__':
+    generate_chatdb("List the names of all distinct medications, ordered in an alphabetical order.")

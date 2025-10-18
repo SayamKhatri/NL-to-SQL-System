@@ -1,9 +1,13 @@
 from neo4j import GraphDatabase
 import numpy as np
 import openai
+import os 
+from dotenv import load_dotenv
 
 # Function to create embeddings
 def get_embedding(text):
+    load_dotenv()
+    openai.api_key = os.getenv('OPENAI_API_KEY')
     response = openai.embeddings.create(
         input=text,
         model="text-embedding-3-small"  

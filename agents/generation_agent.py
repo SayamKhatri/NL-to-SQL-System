@@ -1,7 +1,7 @@
 from langchain.schema import SystemMessage, HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os
-from prompts import GENERATION_AGENT_SYSTEM_MESSAGE
+from agents.prompts import GENERATION_AGENT_SYSTEM_MESSAGE
 
 def generation_agent(question, standardized_context):
     GOOGLE_API_KEY = os.getenv('Gemini_API_KEY')

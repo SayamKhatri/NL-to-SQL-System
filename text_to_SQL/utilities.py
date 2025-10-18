@@ -5,7 +5,7 @@ import os
 def connect_db():
     db_path = os.path.join('db', 'hospital_1.sqlite')
     conn = sqlite3.connect(db_path)
-    return db_path
+    return conn
 
 def gold_query_result(query):
   conn = connect_db()

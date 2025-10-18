@@ -1,6 +1,8 @@
 from neo4j import GraphDatabase
 import yaml
 import os
+import warnings
+warnings.filterwarnings('ignore')
 
 def connect_to_neo4j():
     CONFIG_PATH = os.path.join('config', 'config.yaml')
